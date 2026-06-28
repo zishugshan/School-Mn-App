@@ -1,0 +1,19 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+resources:
+  - configmap.yaml
+  - secrets.yaml
+  - postgres-deployment.yaml
+  - backend-deployment.yaml
+  - frontend-deployment.yaml
+  - ingress.yaml
+
+commonLabels:
+  app: school-mgmt
+
+images:
+  - name: school-mgmt/backend
+    newTag: latest
+  - name: school-mgmt/frontend
+    newTag: latest

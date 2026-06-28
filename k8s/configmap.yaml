@@ -1,0 +1,33 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: school-config
+  labels:
+    app: school-mgmt
+data:
+  SPRING_DATASOURCE_URL: "jdbc:postgresql://postgres:5432/school_mgmt"
+  SPRING_DATASOURCE_USERNAME: "school_admin"
+  SPRING_JPA_HIBERNATE_DDL_AUTO: "update"
+  SPRING_PROFILES_ACTIVE: "prod"
+  SCHOOL_NAME: "School Management System"
+  FILE_UPLOAD_DIR: "/app/uploads"
+  VITE_API_URL: "/api"
+  nginx.conf: |
+    server {
+        listen 80;
+        server_name localhost;
+        root /usr/share/nginx/html;
+        index index.html;
+
+        location /api/ {
+            proxy_pass http://backend:8080/api/;
+            proxy_set_header Host $host;
+            proxy_set_header X-Real-IP $remote_addr;
+            proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+            proxy_set_header X-Forwarded-Proto $scheme;
+        }
+
+        location / {
+            try_files $uri $uri/ /index.html;
+        }
+    }

@@ -1,0 +1,1 @@
+ALTER TABLE student_goals ADD COLUMN IF NOT EXISTS unit VARCHAR(50);
