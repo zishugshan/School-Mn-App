@@ -9,14 +9,14 @@
 ## Quick Start
 
 ```bash
+# Reset DB (first time or after schema changes)
+docker exec -it school-postgres psql -U school_admin -d school_mgmt -c "DROP SCHEMA public CASCADE; CREATE SCHEMA public;"
+
 # Backend
 cd backend && ./gradlew bootRun
 
 # Frontend
 cd frontend && npm install && npm run dev
-
-# Full stack
-docker compose up --build
 ```
 
 ## Backend commands
@@ -27,16 +27,28 @@ docker compose up --build
 ./gradlew bootRun        # dev server on :8080
 ```
 
-Frontend proxies `/api/*` → `localhost:8080` via Vite config.
+Frontend proxies `/api/*` → `localhost:8080` via Vite config (dev only).
 
 ## Database
 
 - Flyway migrations in `backend/src/main/resources/db/migration/`
 - `V1__init_schema.sql` — full schema (42+ tables)
-- `V2__sample_data.sql` — dev sample data (users pw: `password123`)
-- `ddl-auto: validate` — Flyway owns the schema; never use `update`
-- Local: `jdbc:postgresql://localhost:5432/school_mgmt`, user/pass `postgres/postgres`
+- `V2` through `V7` were **removed** (contained sample data, not suitable for production)
+- `V11` seeds **classes 1-12** with sections A/B/C (previously only 11-12)
+- `V14` — `schools` table
+- `V15` — `contact_inquiries` table
+- **Never** use `ddl-auto: update` — Flyway owns the schema
+- Local: `jdbc:postgresql://localhost:5432/school_mgmt`, user/pass `school_admin`/`changeme`
+- Docker PostgreSQL data is bind-mounted to `./data/postgres/` (gitignored)
 - Tests use H2 in-memory
+
+## Registration / Class Auto-Creation
+
+- During registration, class field is **text input** (number or name like "LKG")
+- Backend looks up class by `name` → then by `code ("CLS-" + input)` → auto-creates if neither matches
+- Sections are auto-created per class if they don't exist
+- `GET /api/classes` is **public** (no auth) so the registration page can fetch existing classes
+- `ClassRepository.findByName(String)` added for name-based class lookup
 
 ## Architecture
 
@@ -70,29 +82,37 @@ Student identity: 6-char alphanumeric `student_code` (e.g. `A7K92P`), generated 
 
 - JWT in `Authorization: Bearer <token>` header
 - Roles: `SUPER_ADMIN`, `SCHOOL_ADMIN`, `TEACHER`, `STUDENT`, `PARENT`
-- Public endpoints: `/api/auth/**`, `/swagger-ui/**`, `/api-docs/**`, `/actuator/health`
+- Public endpoints: `/api/auth/**`, `/swagger-ui/**`, `/api-docs/**`, `/actuator/health`, `/api/contact` (POST), `/api/classes`
 - Write endpoints guarded with `@PreAuthorize`
 - Refresh tokens in `refresh_tokens` table
+
+## Frontend
+
+- **Axios baseURL**: `import.meta.env.VITE_API_URL || '/api'` — set `VITE_API_URL` in Vercel env vars for production
+- **ProfilePage**: Fetches student class/section from `GET /api/students/user/{userId}` (was hardcoded to "10-A")
+- **Registration**: Class input is a number/name text field, not a dropdown — section is text
+- **vite-env.d.ts**: Self-contained `ImportMeta` and `ImportMetaEnv` type declarations (no `vite/client` dependency)
 
 ## Frontend layout
 
 ```
 src/
-  api/           Axios instance + 12 API modules
+  api/           Axios instance + 14 API modules
   components/    common (DataTable, StatCard, SearchBar, etc.) + charts (4)
   context/       AuthContext with login/register/logout
-  pages/         37 page components by domain
+  pages/         40+ page components by domain
   types/         TypeScript interfaces matching backend DTOs
   hooks/         useApi custom hook
   utils/         constants, helpers
 ```
 
-## Docker / K8s
+## Docker / K8s / Deploy
 
-- `docker-compose.yml` — PostgreSQL 16 + backend + frontend
-- `k8s/` — StatefulSet for Postgres, Deployments for backend (2 replicas) + frontend (2 replicas), ConfigMap, Secrets, Ingress
-- `.github/workflows/ci.yml` — build + test + docker build on push/PR
-- `.github/workflows/deploy.yml` — manual deploy via `kubectl set image`
+- PostgreSQL 16 in Docker with bind mount `./data/postgres` (gitignored)
+- `backend/Dockerfile` — multi-stage: `gradle:8.10-jdk21` build → `eclipse-temurin:21-jre-alpine` runtime
+- `application-prod.properties` — uses `SPRING_DATASOURCE_*` env vars for Render
+- Frontend deployed on **Vercel** with `VITE_API_URL` pointing to Render backend
+- Flyway checksum validation — modifying existing migrations after they've run causes errors; drop/recreate schema instead
 
 ## Conventions
 
