@@ -15,4 +15,6 @@ public interface ClassRepository extends JpaRepository<ClassEntity, Long> {
     List<ClassEntity> findByIsActiveTrue();
 
     List<ClassEntity> findByNameContainingIgnoreCase(String name);
+
+    Optional<ClassEntity> findByName(String name);
 }

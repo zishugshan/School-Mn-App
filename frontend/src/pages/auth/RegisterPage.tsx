@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import { useNavigate, Link as RouterLink } from 'react-router-dom'
 import {
   Box, Card, CardContent, TextField, Button, Typography, Link,
@@ -7,11 +7,8 @@ import {
 import { Visibility, VisibilityOff, School } from '@mui/icons-material'
 import { useAuth } from '@/context/AuthContext'
 import { toast } from 'react-toastify'
-import { getClasses } from '@/api/attendance.api'
 
 const ROLES = ['SUPER_ADMIN', 'SCHOOL_ADMIN', 'TEACHER', 'STUDENT', 'PARENT']
-
-interface ClassOption { id: string; name: string }
 
 export default function RegisterPage() {
   const navigate = useNavigate()
@@ -19,20 +16,9 @@ export default function RegisterPage() {
   const [form, setForm] = useState({ email: '', password: '', firstName: '', lastName: '', phone: '', role: '' })
   const [classId, setClassId] = useState('')
   const [sectionId, setSectionId] = useState('')
-  const [classes, setClasses] = useState<ClassOption[]>([])
   const [showPassword, setShowPassword] = useState(false)
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
-
-  useEffect(() => {
-    if (form.role === 'STUDENT') {
-      getClasses().then(r => setClasses(r.data.data || [])).catch(() => {})
-    } else {
-      setClasses([])
-      setClassId('')
-      setSectionId('')
-    }
-  }, [form.role])
 
   const handleChange = (field: string) => (e: React.ChangeEvent<HTMLInputElement>) =>
     setForm({ ...form, [field]: e.target.value })
@@ -106,10 +92,8 @@ export default function RegisterPage() {
             </TextField>
             {form.role === 'STUDENT' && (
               <>
-                <TextField fullWidth select label="Class" value={classId} onChange={(e) => { setClassId(e.target.value) }} margin="normal">
-                  {classes.map((c) => <MenuItem key={c.id} value={c.id}>{c.name}</MenuItem>)}
-                </TextField>
-                <TextField fullWidth label="Section (A, B, C...)" value={sectionId} onChange={(e) => setSectionId(e.target.value)} margin="normal" disabled={!classId} placeholder="e.g. A" />
+                <TextField fullWidth label="Class (grade number)" type="number" value={classId} onChange={(e) => setClassId(e.target.value)} margin="normal" placeholder="e.g. 11" inputProps={{ min: 1, max: 12 }} />
+                <TextField fullWidth label="Section" value={sectionId} onChange={(e) => setSectionId(e.target.value)} margin="normal" placeholder="e.g. A" disabled={!classId} />
               </>
             )}
             <Button type="submit" fullWidth variant="contained" size="large" disabled={loading} sx={{ mt: 3, mb: 2 }}>

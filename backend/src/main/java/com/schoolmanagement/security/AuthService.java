@@ -93,9 +93,18 @@ public class AuthService {
             student = studentRepository.save(student);
 
             if (request.classId() != null && request.sectionId() != null) {
-                Long cid = Long.valueOf(request.classId());
-                ClassEntity classEntity = classRepository.findById(cid)
-                        .orElseThrow(() -> new RuntimeException("Class not found"));
+                String className = request.classId().trim();
+                ClassEntity classEntity = classRepository.findByName(className)
+                        .orElseGet(() -> {
+                            ClassEntity newClass = ClassEntity.builder()
+                                    .name(className)
+                                    .code("CLS-" + className)
+                                    .description("Class " + className)
+                                    .isActive(true)
+                                    .build();
+                            return classRepository.save(newClass);
+                        });
+                Long cid = classEntity.getId();
                 String sectionName = request.sectionId().trim().toUpperCase();
                 Section section = sectionRepository.findByClassEntityIdAndName(cid, sectionName)
                         .orElseGet(() -> {
