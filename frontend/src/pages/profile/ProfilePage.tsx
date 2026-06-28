@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import {
   Box, Typography, Grid, Avatar, Chip, Button, TextField,
   Table, TableBody, TableCell, TableContainer, TableRow, Card, CardContent,
@@ -6,6 +6,7 @@ import {
 import { Edit, PhotoCamera } from '@mui/icons-material'
 import { useAuth } from '@/context/AuthContext'
 import { toast } from 'react-toastify'
+import api from '@/api/axios'
 
 export default function ProfilePage() {
   const { user } = useAuth()
@@ -13,6 +14,16 @@ export default function ProfilePage() {
   const [name, setName] = useState(`${user?.firstName || ''} ${user?.lastName || ''}`.trim())
   const [email, setEmail] = useState(user?.email || '')
   const [phone, setPhone] = useState('+1-555-0100')
+  const [studentData, setStudentData] = useState<{ className: string; sectionName: string; studentCode: string } | null>(null)
+
+  useEffect(() => {
+    if (user?.role === 'STUDENT' && user?.id) {
+      api.get(`/students/user/${user.id}`).then(r => {
+        const d = r.data?.data || r.data
+        setStudentData(d)
+      }).catch(() => {})
+    }
+  }, [user])
 
   const roleInfo: Record<string, { label: string; color: 'error' | 'primary' | 'secondary' | 'info' }> = {
     SUPER_ADMIN: { label: 'Super Admin', color: 'error' as const },
@@ -106,15 +117,11 @@ export default function ProfilePage() {
                         <>
                           <TableRow>
                             <TableCell sx={{ fontWeight: 600 }}>Class</TableCell>
-                            <TableCell>10-A</TableCell>
+                            <TableCell>{studentData ? `${studentData.className?.replace('Class ', '') || ''} ${studentData.sectionName || ''}` : '-'}</TableCell>
                           </TableRow>
                           <TableRow>
-                            <TableCell sx={{ fontWeight: 600 }}>Roll Number</TableCell>
-                            <TableCell>1012</TableCell>
-                          </TableRow>
-                          <TableRow>
-                            <TableCell sx={{ fontWeight: 600 }}>Admission Number</TableCell>
-                            <TableCell>ADM-2024-001</TableCell>
+                            <TableCell sx={{ fontWeight: 600 }}>Student Code</TableCell>
+                            <TableCell>{studentData?.studentCode || '-'}</TableCell>
                           </TableRow>
                         </>
                       )}

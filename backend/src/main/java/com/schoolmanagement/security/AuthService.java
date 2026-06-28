@@ -95,15 +95,16 @@ public class AuthService {
             if (request.classId() != null && request.sectionId() != null) {
                 String className = request.classId().trim();
                 ClassEntity classEntity = classRepository.findByName(className)
-                        .orElseGet(() -> {
-                            ClassEntity newClass = ClassEntity.builder()
-                                    .name(className)
-                                    .code("CLS-" + className)
-                                    .description("Class " + className)
-                                    .isActive(true)
-                                    .build();
-                            return classRepository.save(newClass);
-                        });
+                        .orElseGet(() -> classRepository.findByCode("CLS-" + className)
+                                .orElseGet(() -> {
+                                    ClassEntity newClass = ClassEntity.builder()
+                                            .name(className)
+                                            .code("CLS-" + className)
+                                            .description("Class " + className)
+                                            .isActive(true)
+                                            .build();
+                                    return classRepository.save(newClass);
+                                }));
                 Long cid = classEntity.getId();
                 String sectionName = request.sectionId().trim().toUpperCase();
                 Section section = sectionRepository.findByClassEntityIdAndName(cid, sectionName)
