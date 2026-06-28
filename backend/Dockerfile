@@ -1,7 +1,7 @@
-FROM eclipse-temurin:21-jdk-alpine AS build
+FROM gradle:8.10-jdk21 AS build
 WORKDIR /app
 COPY . .
-RUN ./gradlew bootJar
+RUN gradle bootJar
 
 FROM eclipse-temurin:21-jre-alpine
 WORKDIR /app
