@@ -35,3 +35,6 @@ uploads/
 
 # Logs
 *.log
+
+# PostgreSQL data
+data/
