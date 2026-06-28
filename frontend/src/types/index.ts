@@ -534,21 +534,34 @@ export interface StudentTransport {
   fee: number
 }
 
-export interface Conversation {
-  id: string
-  participants: { userId: string; name: string; photo?: string }[]
-  lastMessage?: ChatMessage
+export interface ChatConversation {
+  userId: string
+  userName: string
+  userRole: string
+  profilePhoto: string | null
+  lastMessage: string
+  lastMessageTime: string
   unreadCount: number
-  updatedAt: string
 }
 
 export interface ChatMessage {
   id: string
-  conversationId: string
   senderId: string
   senderName: string
+  receiverId: string
+  receiverName: string
   content: string
-  timestamp: string
+  isRead: boolean
+  sentAt: string
+  readAt: string | null
+}
+
+export interface ChatUser {
+  id: string
+  name: string
+  email: string
+  role: string
+  profilePhoto: string | null
 }
 
 export interface Remark {

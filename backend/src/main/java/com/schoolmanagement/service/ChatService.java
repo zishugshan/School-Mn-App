@@ -57,26 +57,14 @@ public class ChatService {
 
     @Transactional(readOnly = true)
     public List<Map<String, Object>> getUserConversations(Long userId) {
-        User currentUser = userRepository.findById(userId)
+        userRepository.findById(userId)
                 .orElseThrow(() -> new ResourceNotFoundException("User", "id", userId));
 
-        List<ChatMessage> sentMessages = chatMessageRepository.findConversation(userId, -1L);
-        List<ChatMessage> receivedMessages = chatMessageRepository.findConversation(-1L, userId);
-
-        List<Long> conversationUserIds = new ArrayList<>();
-
-        List<ChatMessage> allConversations = chatMessageRepository.findConversation(userId, 0L);
-        allConversations.clear();
-
-        List<ChatMessage> allMessages = new ArrayList<>();
-
-        for (ChatMessage msg : chatMessageRepository.findConversation(userId, -1L)) {
-            allMessages.add(msg);
-        }
+        List<ChatMessage> allMessages = chatMessageRepository.findAll();
 
         List<ChatMessage> latestMessages = new ArrayList<>();
 
-        for (ChatMessage msg : chatMessageRepository.findAll()) {
+        for (ChatMessage msg : allMessages) {
             boolean isParticipant = msg.getSender().getId().equals(userId) ||
                     msg.getReceiver().getId().equals(userId);
 
@@ -131,6 +119,21 @@ public class ChatService {
         }
 
         return conversations;
+    }
+
+    @Transactional(readOnly = true)
+    public List<Map<String, Object>> searchUsers(String query) {
+        List<User> users = userRepository.findByFirstNameContainingIgnoreCaseOrLastNameContainingIgnoreCaseOrEmailContainingIgnoreCase(
+                query, query, query);
+        return users.stream().map(u -> {
+            Map<String, Object> map = new LinkedHashMap<>();
+            map.put("id", u.getId());
+            map.put("name", u.getFirstName() + " " + u.getLastName());
+            map.put("email", u.getEmail());
+            map.put("role", u.getRole().name());
+            map.put("profilePhoto", u.getProfilePhoto());
+            return map;
+        }).collect(Collectors.toList());
     }
 
     private ChatMessageResponse toResponse(ChatMessage message) {

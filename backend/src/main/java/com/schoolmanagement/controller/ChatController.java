@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -46,5 +47,11 @@ public class ChatController {
     public ApiResponse<List<Map<String, Object>>> getUserConversations(@PathVariable Long userId) {
         List<Map<String, Object>> conversations = chatService.getUserConversations(userId);
         return ApiResponse.success(conversations, "Conversations retrieved successfully");
+    }
+
+    @GetMapping("/users/search")
+    public ApiResponse<List<Map<String, Object>>> searchUsers(@RequestParam String q) {
+        List<Map<String, Object>> users = chatService.searchUsers(q);
+        return ApiResponse.success(users, "Users retrieved successfully");
     }
 }
