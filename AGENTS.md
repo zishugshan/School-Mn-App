@@ -37,6 +37,7 @@ Frontend proxies `/api/*` → `localhost:8080` via Vite config (dev only).
 - `V11` seeds **classes 1-12** with sections A/B/C (previously only 11-12)
 - `V14` — `schools` table
 - `V15` — `contact_inquiries` table
+- `V16` — seeds demo users (superadmin, teacher, student, parent) with password `password123`
 - **Never** use `ddl-auto: update` — Flyway owns the schema
 - Local: `jdbc:postgresql://localhost:5432/school_mgmt`, user/pass `school_admin`/`changeme`
 - Docker PostgreSQL data is bind-mounted to `./data/postgres/` (gitignored)

@@ -124,6 +124,12 @@ Vercel handles client-side routing automatically for Vite projects. No `vercel.j
 
 **If you added a new Flyway migration** → Render will apply it automatically on startup. No DB reset needed.
 
+**Demo users** (seeded by `V16__seed_demo_users.sql` — password for all: `password123`):
+- `superadmin@school.com` — SUPER_ADMIN
+- `mohan@school.com` — TEACHER
+- `sana@school.com` — STUDENT
+- `imtiyaz.parent@school.com` — PARENT
+
 **If you modified an existing migration** (e.g., V11) → Render deploy will fail with checksum error. Fix:
 
 - Option A (dev only): Drop the DB schema on Neon → redeploy (all data lost)
