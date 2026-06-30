@@ -1,0 +1,73 @@
+First Name,Last Name,Email,Date of Birth,Gender,Class,Section,Address,City,State,Pin Code
+Radhika,Tiwari,student1@school.com,2020-05-14,FEMALE,1,A,"237, Green Park",Varanasi,Uttar Pradesh,407236
+Tanvi,Yadav,student2@school.com,2020-06-22,FEMALE,1,A,"988, Shastri Nagar",Hyderabad,Telangana,810728
+Parul,Naidu,student3@school.com,2020-12-04,FEMALE,1,B,"487, Shastri Nagar",Varanasi,Uttar Pradesh,264069
+Shreya,Das,student4@school.com,2020-06-18,FEMALE,1,B,"461, Lake View Colony",New Delhi,Delhi,575707
+Hemant,Malhotra,student5@school.com,2020-10-18,MALE,1,C,"485, Sector 6",Jaipur,Rajasthan,149896
+Usha,Naidu,student6@school.com,2020-06-13,FEMALE,1,C,"209, Green Park",Coimbatore,Tamil Nadu,498199
+Varun,Mehra,student7@school.com,2019-10-08,MALE,2,A,"397, Sector 13",Patna,Bihar,509278
+Aryan,Iyer,student8@school.com,2019-09-21,MALE,2,A,"426, Main Street",Nagpur,Maharashtra,299992
+Manish,Dubey,student9@school.com,2019-06-01,MALE,2,B,"365, Green Park",Vadodara,Gujarat,499653
+Ganesh,Malhotra,student10@school.com,2019-07-10,MALE,2,B,"524, Main Street",Kanpur,Uttar Pradesh,179690
+Tanvi,Gill,student11@school.com,2019-07-03,FEMALE,2,C,"103, Main Street",Jodhpur,Rajasthan,648765
+Pooja,Chatterjee,student12@school.com,2019-07-27,FEMALE,2,C,"249, MG Road",Bangalore,Karnataka,660185
+Vandana,Gupta,student13@school.com,2018-11-28,FEMALE,3,A,"873, Lake View Colony",Pune,Maharashtra,651649
+Shweta,Tiwari,student14@school.com,2018-01-16,FEMALE,3,A,"201, Lake View Colony",Delhi,Delhi,614649
+Garima,Jain,student15@school.com,2018-09-26,FEMALE,3,B,"252, Indira Colony",Kolkata,West Bengal,940235
+Aditi,Dubey,student16@school.com,2018-07-10,FEMALE,3,B,"534, Main Street",Patna,Bihar,909146
+Hemant,Joshi,student17@school.com,2018-04-25,MALE,3,C,"964, MG Road",Howrah,West Bengal,415427
+Madhu,Das,student18@school.com,2018-09-10,FEMALE,3,C,"607, Lake View Colony",Varanasi,Uttar Pradesh,853131
+Lavanya,Saxena,student19@school.com,2017-06-16,FEMALE,4,A,"969, Shastri Nagar",Kanpur,Uttar Pradesh,485993
+Usha,Patel,student20@school.com,2017-09-10,FEMALE,4,A,"814, Main Street",Mysore,Karnataka,989077
+Tanvi,Bhatt,student21@school.com,2017-12-14,FEMALE,4,B,"454, Lake View Colony",Howrah,West Bengal,858564
+Pallavi,Joshi,student22@school.com,2017-06-23,FEMALE,4,B,"256, MG Road",New Delhi,Delhi,316278
+Lokesh,Reddy,student23@school.com,2017-03-28,MALE,4,C,"741, Shastri Nagar",Lucknow,Uttar Pradesh,764871
+Pooja,Gupta,student24@school.com,2017-03-09,FEMALE,4,C,"843, Sector 29",Thane,Maharashtra,273361
+Usha,Dwivedi,student25@school.com,2016-10-19,FEMALE,5,A,"542, Sector 18",Coimbatore,Tamil Nadu,480318
+Sachin,Chopra,student26@school.com,2016-09-19,MALE,5,A,"981, Green Park",Patna,Bihar,937408
+Parul,Joshi,student27@school.com,2016-06-07,FEMALE,5,B,"344, MG Road",Madurai,Tamil Nadu,689805
+Radhika,Malhotra,student28@school.com,2016-10-05,FEMALE,5,B,"268, Gandhi Nagar",Gaya,Bihar,262635
+Rohan,Kohli,student29@school.com,2016-12-01,MALE,5,C,"529, MG Road",Surat,Gujarat,286630
+Neha,Tiwari,student30@school.com,2016-10-20,FEMALE,5,C,"556, Green Park",Coimbatore,Tamil Nadu,671120
+Mitali,Mishra,student31@school.com,2015-04-17,FEMALE,6,A,"629, Gandhi Nagar",Hubli,Karnataka,210304
+Kavita,Das,student32@school.com,2015-10-23,FEMALE,6,A,"221, Green Park",Kanpur,Uttar Pradesh,330319
+Sanjay,Dubey,student33@school.com,2015-11-05,MALE,6,B,"142, Sector 24",Chennai,Tamil Nadu,631304
+Priya,Gill,student34@school.com,2015-04-14,FEMALE,6,B,"559, Shastri Nagar",Patna,Bihar,294001
+Anjali,Iyer,student35@school.com,2015-06-08,FEMALE,6,C,"181, Shastri Nagar",Bangalore,Karnataka,344061
+Tarun,Naidu,student36@school.com,2015-12-20,MALE,6,C,"41, Gandhi Nagar",Nashik,Maharashtra,599334
+Aarohi,Kohli,student37@school.com,2014-08-07,FEMALE,7,A,"888, Main Street",Varanasi,Uttar Pradesh,273796
+Anjali,Malhotra,student38@school.com,2014-01-02,FEMALE,7,A,"172, Sector 12",Patna,Bihar,593681
+Komal,Chopra,student39@school.com,2014-08-10,FEMALE,7,B,"384, Green Park",Nagpur,Maharashtra,865742
+Rajesh,Iyer,student40@school.com,2014-12-15,MALE,7,B,"816, Main Street",Lucknow,Uttar Pradesh,317888
+Varun,Bose,student41@school.com,2014-07-22,MALE,7,C,"414, Shastri Nagar",Gaya,Bihar,728848
+Ravi,Prasad,student42@school.com,2014-11-05,MALE,7,C,"714, Gandhi Nagar",Udaipur,Rajasthan,213650
+Rohan,Tiwari,student43@school.com,2013-05-12,MALE,8,A,"331, Shastri Nagar",New Delhi,Delhi,894129
+Manish,Dubey,student44@school.com,2013-10-20,MALE,8,A,"235, Shastri Nagar",Jodhpur,Rajasthan,294469
+Nitin,Trivedi,student45@school.com,2013-11-27,MALE,8,B,"224, Main Street",Delhi,Delhi,411080
+Shweta,Prasad,student46@school.com,2013-05-17,FEMALE,8,B,"956, Green Park",Howrah,West Bengal,724439
+Ritu,Mishra,student47@school.com,2013-12-13,FEMALE,8,C,"76, Lake View Colony",Patna,Bihar,314873
+Kabir,Sharma,student48@school.com,2013-05-17,MALE,8,C,"13, Indira Colony",Lucknow,Uttar Pradesh,205801
+Kabir,Naidu,student49@school.com,2012-08-27,MALE,9,A,"952, Green Park",Thane,Maharashtra,878440
+Shweta,Pillai,student50@school.com,2012-11-25,FEMALE,9,A,"217, Green Park",Patna,Bihar,425391
+Ekta,Sharma,student51@school.com,2012-06-24,FEMALE,9,B,"187, Sector 2",Madurai,Tamil Nadu,971154
+Deepak,Yadav,student52@school.com,2012-03-18,MALE,9,B,"341, Sector 23",Patna,Bihar,286605
+Harini,Kulkarni,student53@school.com,2012-06-26,FEMALE,9,C,"685, Sector 19",Chennai,Tamil Nadu,535107
+Sandeep,Verma,student54@school.com,2012-09-24,MALE,9,C,"435, Gandhi Nagar",Pune,Maharashtra,932539
+Rashmi,Mehra,student55@school.com,2011-05-20,FEMALE,10,A,"223, Green Park",Howrah,West Bengal,955575
+Pankaj,Bhatt,student56@school.com,2011-08-25,MALE,10,A,"176, Sector 8",Madurai,Tamil Nadu,388885
+Tushar,Naidu,student57@school.com,2011-09-07,MALE,10,B,"452, Gandhi Nagar",Thane,Maharashtra,692683
+Yash,Iyer,student58@school.com,2011-11-23,MALE,10,B,"92, Lake View Colony",Patna,Bihar,843047
+Naveen,Dwivedi,student59@school.com,2011-12-15,MALE,10,C,"70, MG Road",Kanpur,Uttar Pradesh,557414
+Kavita,Gill,student60@school.com,2011-01-28,FEMALE,10,C,"274, MG Road",Lucknow,Uttar Pradesh,399981
+Sachin,Sharma,student61@school.com,2010-02-22,MALE,11,A,"598, MG Road",Vadodara,Gujarat,889091
+Parul,Pillai,student62@school.com,2010-03-01,FEMALE,11,A,"741, MG Road",Kanpur,Uttar Pradesh,640299
+Rashmi,Singh,student63@school.com,2010-07-20,FEMALE,11,B,"534, Shastri Nagar",Hyderabad,Telangana,472306
+Jhanvi,Choudhury,student64@school.com,2010-07-08,FEMALE,11,B,"321, Green Park",Agra,Uttar Pradesh,597322
+Dhruv,Yadav,student65@school.com,2010-07-23,MALE,11,C,"548, Sector 7",Gaya,Bihar,989040
+Tarun,Naidu,student66@school.com,2010-05-12,MALE,11,C,"732, Lake View Colony",Hubli,Karnataka,287940
+Naveen,Desai,student67@school.com,2009-05-26,MALE,12,A,"458, Main Street",Mumbai,Maharashtra,452792
+Anjali,Saxena,student68@school.com,2009-08-27,FEMALE,12,A,"680, Main Street",Mumbai,Maharashtra,313882
+Neelam,Menon,student69@school.com,2009-12-21,FEMALE,12,B,"69, Shastri Nagar",Madurai,Tamil Nadu,684728
+Naveen,Bhatt,student70@school.com,2009-04-28,MALE,12,B,"305, Green Park",Surat,Gujarat,568902
+Ritu,Malhotra,student71@school.com,2009-03-12,FEMALE,12,C,"413, Shastri Nagar",Patna,Bihar,812373
+Kirti,Naidu,student72@school.com,2009-09-13,FEMALE,12,C,"263, Lake View Colony",Chennai,Tamil Nadu,296522

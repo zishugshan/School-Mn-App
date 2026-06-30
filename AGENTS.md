@@ -141,3 +141,19 @@ src/
 - Student codes are 6-char uppercase alphanumeric, immutable after creation
 - In-app + email notifications for key events (homework, attendance, tests)
 - Reports generated as PDF (iText) or Excel (Apache POI)
+
+## Demo Data Generation
+
+Run `python3 /tmp/gen_demo_data.py` to populate the database with demo data. Requires a running PostgreSQL container.
+
+**What it generates**:
+| Item | Count |
+|---|---|
+| Class-Subject links | 72 |
+| Teacher-Subject assignments | 21 |
+| Attendance records (5 days) | 370 |
+| Tests (2–4 per class/section) | 105 |
+| Marks | 218 |
+| Exam schedules (Mid-Term + Final) | 120 |
+| Homework assignments (2 per class) | 24 |
+| Student goals (1 per student) | 74 |

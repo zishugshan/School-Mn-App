@@ -354,18 +354,30 @@ public class StudentService {
     }
 
     private List<TestSummary> getUpcomingTests(Long studentId) {
-        return testRepository.findByStudentId(studentId).stream()
+        List<Test> tests = testRepository.findByStudentId(studentId);
+        List<Test> upcoming = tests.stream()
                 .filter(t -> t.getTestDate().isAfter(LocalDate.now()) || t.getTestDate().isEqual(LocalDate.now()))
                 .sorted(Comparator.comparing(Test::getTestDate))
-                .limit(10)
-                .map(t -> TestSummary.builder()
-                        .testId(t.getId())
-                        .title(t.getTitle())
-                        .subjectName(t.getSubject().getName())
-                        .testDate(t.getTestDate())
-                        .maximumMarks(t.getMaximumMarks())
-                        .examType(t.getExamType() != null ? t.getExamType().name() : null)
-                        .build())
+                .limit(3)
+                .toList();
+        if (!upcoming.isEmpty()) {
+            return upcoming.stream().map(this::toTestSummary).collect(Collectors.toList());
+        }
+        return tests.stream()
+                .sorted(Comparator.comparing(Test::getTestDate).reversed())
+                .limit(3)
+                .map(this::toTestSummary)
                 .collect(Collectors.toList());
+    }
+
+    private TestSummary toTestSummary(Test t) {
+        return TestSummary.builder()
+                .testId(t.getId())
+                .title(t.getTitle())
+                .subjectName(t.getSubject().getName())
+                .testDate(t.getTestDate())
+                .maximumMarks(t.getMaximumMarks())
+                .examType(t.getExamType() != null ? t.getExamType().name() : null)
+                .build();
     }
 }
