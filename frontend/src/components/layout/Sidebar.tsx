@@ -37,6 +37,7 @@ import FactCheckOutlinedIcon from '@mui/icons-material/FactCheckOutlined'
 import CottageIcon from '@mui/icons-material/Cottage'
 import BusinessIcon from '@mui/icons-material/Business'
 import ContactMailIcon from '@mui/icons-material/ContactMail'
+import FileUploadIcon from '@mui/icons-material/FileUpload'
 import SettingsIcon from '@mui/icons-material/Settings'
 import PersonIcon from '@mui/icons-material/Person'
 import KeyboardDoubleArrowLeftIcon from '@mui/icons-material/KeyboardDoubleArrowLeft'
@@ -84,6 +85,7 @@ const allNavItems: NavItem[] = [
   { label: 'Fees', path: '/fees', icon: <AccountBalanceWalletIcon />, roles: ['SUPER_ADMIN', 'SCHOOL_ADMIN', 'PARENT'] },
   { label: 'Timetable', path: '/timetable', icon: <CalendarViewWeekIcon />, roles: ROLES_ALL },
   { label: 'Exams', path: '/exams', icon: <FactCheckOutlinedIcon />, roles: ['SUPER_ADMIN', 'SCHOOL_ADMIN', 'TEACHER', 'STUDENT', 'PARENT'] },
+  { label: 'Import', path: '/admin/import', icon: <FileUploadIcon />, roles: ['SUPER_ADMIN'] },
   { label: 'Schools', path: '/admin/schools', icon: <BusinessIcon />, roles: ['SUPER_ADMIN'] },
   { label: 'Inquiries', path: '/admin/inquiries', icon: <ContactMailIcon />, roles: ['SUPER_ADMIN'] },
   { label: 'Houses', path: '/houses', icon: <CottageIcon />, roles: ['SUPER_ADMIN', 'SCHOOL_ADMIN'] },

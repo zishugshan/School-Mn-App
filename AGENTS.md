@@ -62,8 +62,8 @@ entity/          39 JPA entities + 11 enums
 repository/      39 Spring Data JPA repos
 dto/             request/ (14) + response/ (14) DTOs
 mapper/          6 MapStruct interfaces
-service/         13 services (Student, Teacher, Attendance, Homework, Test, etc.)
-controller/      30 REST controllers
+service/         14 services (Student, Teacher, Attendance, Homework, Test, BulkImport, etc.)
+controller/      31 REST controllers
 exception/       GlobalExceptionHandler + custom exceptions
 ```
 
@@ -78,6 +78,19 @@ Student identity: 6-char alphanumeric `student_code` (e.g. `A7K92P`), generated 
 - Swagger: `http://localhost:8080/swagger-ui.html`
 - All endpoints return `ApiResponse<T>` wrapper `{ success, message, data, timestamp }`
 - Pagination returns `PageResponse<T>` `{ content, page, size, totalElements, totalPages }`
+
+## Bulk Import (CSV / Excel)
+
+- Endpoints: `POST /api/import/students` and `POST /api/import/teachers`
+- Auth: `SUPER_ADMIN` or `SCHOOL_ADMIN` only
+- Accepts `.csv`, `.xlsx`, `.xls` (multipart/form-data, field name: `file`)
+- Default password for imported users: `SCHOOL@2024`
+- Supports flexible column headers (e.g. "First Name", "firstName", "first_name")
+- **Student CSV columns**: First Name, Last Name, Email, Date of Birth, Gender, Class, Section, (Address, City, State, Pin Code optional)
+- **Teacher CSV columns**: First Name, Last Name, Email, Date of Birth, Gender, Qualification, Address, Phone
+- Class/Section are auto-created if they don't exist (same logic as registration)
+- Returns success/error counts per row — duplicate emails are skipped with an error message
+- Frontend: `/admin/import` page with drag-and-drop upload, type selector (Students/Teachers), template download, and results table
 
 ## Security
 

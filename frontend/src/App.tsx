@@ -45,6 +45,7 @@ import ParentDashboard from './pages/dashboard/parent/ParentDashboard'
 import LandingPage from './pages/landing/LandingPage'
 import SchoolsPage from './pages/superadmin/SchoolsPage'
 import InquiriesPage from './pages/superadmin/InquiriesPage'
+import ImportPage from './pages/superadmin/ImportPage'
 
 const ProtectedRoute: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const { isAuthenticated, isLoading } = useAuth()
@@ -151,6 +152,7 @@ const App: React.FC = () => {
         <Route path="/profile" element={<ProfilePage />} />
         <Route path="/admin/schools" element={<BlockStudent><SchoolsPage /></BlockStudent>} />
         <Route path="/admin/inquiries" element={<BlockStudent><InquiriesPage /></BlockStudent>} />
+        <Route path="/admin/import" element={<BlockStudent><ImportPage /></BlockStudent>} />
       </Route>
       <Route path="*" element={<NotFoundPage />} />
     </Routes>
