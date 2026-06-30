@@ -185,7 +185,7 @@ RAISE NOTICE '  % links created', total;
 RAISE NOTICE '4. Generating attendance...';
 total := 0;
 FOR i IN 1..5 LOOP
-    att_date := today - (6 - i) || ' days'::INTERVAL;
+    att_date := today - (6 - i);
     -- Only weekdays
     IF EXTRACT(DOW FROM att_date) BETWEEN 1 AND 5 THEN
         FOR cid IN (SELECT id FROM classes ORDER BY id) LOOP
