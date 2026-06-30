@@ -522,5 +522,39 @@ FOR sid IN (SELECT id FROM students ORDER BY id) LOOP
 END LOOP;
 RAISE NOTICE '  % books issued', total;
 
+-- ============================================================
+-- 13. CREATE TIMETABLE (6 periods/day, Mon-Fri per section)
+-- ============================================================
+RAISE NOTICE '13. Creating timetables...';
+total := 0;
+FOR cid IN (SELECT id FROM classes ORDER BY id) LOOP
+    SELECT name INTO cname FROM classes WHERE id = cid;
+    n := CAST(SUBSTRING(cname FROM 7) AS INT);
+    IF n <= 5 THEN subj_list := ARRAY['Mathematics','English','Science','Hindi','Physical Education','Mathematics','English','Science','Hindi','General'];
+    ELSIF n <= 8 THEN subj_list := ARRAY['Mathematics','English','Science','Social Studies','Hindi','Computer Science','Mathematics','English','Science','Social Studies'];
+    ELSIF n <= 10 THEN subj_list := ARRAY['Mathematics','English','Science','Social Studies','Hindi','Computer Science','Mathematics','English','Science','Physical Education'];
+    ELSE subj_list := ARRAY['Physics','Chemistry','Biology','Mathematics','English','Physical Education','Physics','Chemistry','Biology','Mathematics'];
+    END IF;
+    FOR sec_id IN (SELECT id FROM sections WHERE class_id = cid ORDER BY id) LOOP
+        FOR dow IN 1..5 LOOP
+            FOR period IN 0..5 LOOP
+                subj_name := subj_list[(period + dow * 6) % ARRAY_LENGTH(subj_list, 1) + 1];
+                SELECT id INTO subj_id FROM subjects WHERE name = subj_name;
+                IF subj_id IS NULL THEN CONTINUE; END IF;
+                SELECT ts.teacher_id INTO tid FROM teacher_subject ts WHERE ts.subject_id = subj_id ORDER BY RANDOM() LIMIT 1;
+                IF tid IS NULL THEN CONTINUE; END IF;
+                INSERT INTO timetable_entries (class_id, section_id, subject_id, teacher_id, day_of_week, start_time, end_time, room_number)
+                VALUES (cid, sec_id, subj_id, tid, dow,
+                        ('08:00'::TIME + (period * 50 || ' minutes')::INTERVAL)::TIME,
+                        ('08:00'::TIME + ((period * 50 + 40) || ' minutes')::INTERVAL)::TIME,
+                        'Room ' || (100 + (RANDOM() * 50 + cid * 5)::INT))
+                ON CONFLICT (class_id, section_id, day_of_week, start_time) DO NOTHING;
+                total := total + 1;
+            END LOOP;
+        END LOOP;
+    END LOOP;
+END LOOP;
+RAISE NOTICE '  % timetable entries created', total;
+
 RAISE NOTICE '=== Demo data seeding complete ===';
 END $$;
