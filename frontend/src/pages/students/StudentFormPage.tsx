@@ -8,16 +8,28 @@ import { toast } from 'react-toastify'
 import api from '@/api/axios'
 import { studentsApi } from '@/api/students.api'
 
+interface ClassOption { id: number; name: string; sections: { id: number; name: string }[] }
+
 export default function StudentFormPage() {
   const navigate = useNavigate()
   const { id } = useParams()
   const isEdit = Boolean(id)
   const [loading, setLoading] = useState(isEdit)
   const [saving, setSaving] = useState(false)
+  const [classes, setClasses] = useState<ClassOption[]>([])
+  const [selectedClass, setSelectedClass] = useState('')
+  const [selectedSection, setSelectedSection] = useState('')
   const [form, setForm] = useState({
     firstName: '', lastName: '', email: '', password: '',
     dateOfBirth: '', gender: 'MALE', address: '', city: '', state: '', phone: '',
   })
+
+  useEffect(() => {
+    api.get('/classes').then(r => {
+      const data = r.data?.data || r.data || []
+      setClasses(Array.isArray(data) ? data : data.content || [])
+    }).catch(() => {})
+  }, [])
 
   useEffect(() => {
     if (!id) return
@@ -32,6 +44,9 @@ export default function StudentFormPage() {
       })
     }).catch(() => toast.error('Failed to load student')).finally(() => setLoading(false))
   }, [id])
+
+  const currentClass = classes.find(c => String(c.id) === selectedClass)
+  const sections = currentClass?.sections || []
 
   const handleChange = (field: string) => (e: React.ChangeEvent<HTMLInputElement>) =>
     setForm(f => ({ ...f, [field]: e.target.value }))
@@ -51,6 +66,8 @@ export default function StudentFormPage() {
           email: form.email, password: form.password || 'password123',
           firstName: form.firstName, lastName: form.lastName,
           phone: form.phone, role: 'STUDENT',
+          classId: selectedClass ? Number(selectedClass) : null,
+          sectionId: selectedSection ? Number(selectedSection) : null,
         })
         toast.success('Student registered successfully')
       }
@@ -101,6 +118,22 @@ export default function StudentFormPage() {
               <MenuItem value="FEMALE">Female</MenuItem>
             </TextField>
           </Grid>
+          {!isEdit && (
+            <>
+              <Grid item xs={12} sm={6}>
+                <TextField fullWidth label="Class" select value={selectedClass} onChange={e => { setSelectedClass(e.target.value); setSelectedSection('') }}>
+                  <MenuItem value="">Select Class</MenuItem>
+                  {classes.map(c => <MenuItem key={c.id} value={String(c.id)}>{c.name}</MenuItem>)}
+                </TextField>
+              </Grid>
+              <Grid item xs={12} sm={6}>
+                <TextField fullWidth label="Section" select value={selectedSection} onChange={e => setSelectedSection(e.target.value)} disabled={!selectedClass}>
+                  <MenuItem value="">Select Section</MenuItem>
+                  {sections.map(s => <MenuItem key={s.id} value={String(s.id)}>{s.name}</MenuItem>)}
+                </TextField>
+              </Grid>
+            </>
+          )}
           <Grid item xs={12} sm={6}>
             <TextField fullWidth label="Phone" value={form.phone} onChange={handleChange('phone')} />
           </Grid>

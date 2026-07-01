@@ -96,9 +96,10 @@ const allNavItems: NavItem[] = [
 interface SidebarProps {
   open: boolean
   onToggle: () => void
+  mobile?: boolean
 }
 
-const Sidebar: React.FC<SidebarProps> = ({ open, onToggle }) => {
+const Sidebar: React.FC<SidebarProps> = ({ open, onToggle, mobile }) => {
   const navigate = useNavigate()
   const location = useLocation()
   const { user } = useAuth()
@@ -107,18 +108,25 @@ const Sidebar: React.FC<SidebarProps> = ({ open, onToggle }) => {
     (item) => user && item.roles.includes(user.role),
   )
 
-  const drawerWidth = open ? NAVIGATION_WIDTH : COLLAPSED_NAV_WIDTH
+  const drawerWidth = mobile ? NAVIGATION_WIDTH : (open ? NAVIGATION_WIDTH : COLLAPSED_NAV_WIDTH)
+
+  const handleNav = (path: string) => {
+    navigate(path)
+    if (mobile) onToggle()
+  }
 
   return (
     <Drawer
-      variant="permanent"
+      variant={mobile ? 'temporary' : 'permanent'}
+      open={mobile ? open : true}
+      onClose={mobile ? onToggle : undefined}
       sx={{
         width: drawerWidth,
         flexShrink: 0,
         whiteSpace: 'nowrap',
         '& .MuiDrawer-paper': {
           width: drawerWidth,
-          transition: 'width 0.2s ease',
+          transition: mobile ? undefined : 'width 0.2s ease',
           overflowX: 'hidden',
           backgroundColor: '#fafafa',
           borderRight: '1px solid',
@@ -141,9 +149,11 @@ const Sidebar: React.FC<SidebarProps> = ({ open, onToggle }) => {
             SchoolMS
           </Typography>
         )}
-        <IconButton onClick={onToggle} size="small">
-          {open ? <KeyboardDoubleArrowLeftIcon /> : <KeyboardDoubleArrowRightIcon />}
-        </IconButton>
+        {!mobile && (
+          <IconButton onClick={onToggle} size="small">
+            {open ? <KeyboardDoubleArrowLeftIcon /> : <KeyboardDoubleArrowRightIcon />}
+          </IconButton>
+        )}
       </Box>
       <Divider />
       <List sx={{ py: 1 }}>
@@ -153,7 +163,7 @@ const Sidebar: React.FC<SidebarProps> = ({ open, onToggle }) => {
             <Tooltip key={item.path} title={open ? '' : item.label} placement="right">
               <ListItemButton
                 selected={isActive}
-                onClick={() => navigate(item.path)}
+                onClick={() => handleNav(item.path)}
                 sx={{
                   mx: 1,
                   borderRadius: 1,
