@@ -146,7 +146,7 @@ SELECT s.id, sc.class_id, sc.section_id, d.d,
        (SELECT id FROM users WHERE email = 'superadmin@school.com')
 FROM students s
 JOIN student_class sc ON sc.student_id = s.id AND sc.is_active = true
-CROSS JOIN (SELECT (CURRENT_DATE - INTERVAL '6 days' + g || ' days')::DATE AS d FROM generate_series(0,4) g) d
+CROSS JOIN (SELECT (CURRENT_DATE - 6 + g) AS d FROM generate_series(0,4) g) d
 WHERE EXTRACT(DOW FROM d.d) BETWEEN 1 AND 5
 ON CONFLICT DO NOTHING;
 RAISE NOTICE '4. Generated attendance';
