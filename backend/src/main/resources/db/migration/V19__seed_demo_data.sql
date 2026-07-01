@@ -142,7 +142,7 @@ RAISE NOTICE '3. Linked subjects to classes';
 -- ============================================================
 INSERT INTO attendance (student_id, class_id, section_id, date, status, marked_by)
 SELECT s.id, sc.class_id, sc.section_id, d.d,
-       (ARRAY['PRESENT','PRESENT','PRESENT','PRESENT','PRESENT','PRESENT','PRESENT','ABSENT','LATE','LEAVE'])[(RANDOM() * 10)::INT + 1],
+       (ARRAY['PRESENT','PRESENT','PRESENT','PRESENT','PRESENT','PRESENT','PRESENT','ABSENT','LATE','LEAVE'])[LEAST((RANDOM() * 10)::INT, 9) + 1],
        (SELECT id FROM users WHERE email = 'superadmin@school.com')
 FROM students s
 JOIN student_class sc ON sc.student_id = s.id AND sc.is_active = true
