@@ -21,7 +21,6 @@ DECLARE
     tid INT;
     subj_id INT;
     subj_name VARCHAR;
-    test_id INT;
     hw_id INT;
     hw_title VARCHAR;
     hw_desc VARCHAR;
@@ -260,12 +259,12 @@ RAISE NOTICE '  % tests created', total;
 -- ============================================================
 RAISE NOTICE '6. Entering marks...';
 total := 0;
-FOR test_id IN (SELECT id FROM tests WHERE test_date < today ORDER BY id) LOOP
-    SELECT t.maximum_marks, t.class_id, t.section_id INTO mm, cid, sec_id FROM tests t WHERE t.id = test_id;
+FOR cur_test_id IN (SELECT id FROM tests WHERE test_date < today ORDER BY id) LOOP
+    SELECT t.maximum_marks, t.class_id, t.section_id INTO mm, cid, sec_id FROM tests t WHERE t.id = cur_test_id;
     FOR sid IN (SELECT s.id FROM students s JOIN student_class sc ON s.id = sc.student_id
                 WHERE sc.class_id = cid AND sc.section_id = sec_id AND sc.is_active = true ORDER BY s.id) LOOP
         INSERT INTO marks (test_id, student_id, marks_obtained, entered_by)
-        VALUES (test_id, sid, (RANDOM() * (mm * 0.75) + mm * 0.25)::INT, superadmin_id)
+        VALUES (cur_test_id, sid, (RANDOM() * (mm * 0.75) + mm * 0.25)::INT, superadmin_id)
         ON CONFLICT (test_id, student_id) DO UPDATE SET marks_obtained = EXCLUDED.marks_obtained;
         total := total + 1;
     END LOOP;
