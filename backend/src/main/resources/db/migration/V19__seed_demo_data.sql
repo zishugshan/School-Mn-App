@@ -94,8 +94,8 @@ CROSS JOIN LATERAL (
     SELECT id FROM subjects
     WHERE name = ANY(
         CASE WHEN t.rn = 1 THEN ARRAY['Mathematics','Science','Physics']
-             WHEN t.rn = 2 THEN ARRAY['Mathematics']
-             WHEN t.rn = 3 THEN ARRAY['Mathematics']
+             WHEN t.rn = 2 THEN ARRAY['Mathematics', 'Physical Education']
+             WHEN t.rn = 3 THEN ARRAY['Mathematics', 'General']
              WHEN t.rn = 4 THEN ARRAY['English']
              WHEN t.rn = 5 THEN ARRAY['English']
              WHEN t.rn = 6 THEN ARRAY['Science']
