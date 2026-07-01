@@ -80,8 +80,8 @@ FOR cid IN (SELECT id FROM classes ORDER BY id) LOOP
                     CASE WHEN first_i % 2 = 0 THEN 'FEMALE' ELSE 'MALE' END)
             RETURNING id INTO sid;
 
-            INSERT INTO student_class (student_id, class_id, section_id, is_active)
-            VALUES (sid, cid, sec_id, true);
+            INSERT INTO student_class (student_id, class_id, section_id, academic_year, is_active)
+            VALUES (sid, cid, sec_id, TO_CHAR(CURRENT_DATE, 'YYYY') || '-' || TO_CHAR(CURRENT_DATE + INTERVAL '1 year', 'YY'), true);
 
             student_count := student_count + 1;
             first_i := first_i + 1;
