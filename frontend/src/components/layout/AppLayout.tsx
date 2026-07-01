@@ -18,7 +18,6 @@ import Sidebar from './Sidebar'
 import NotificationBell from '../common/NotificationBell'
 import { useAuth } from '../../context/AuthContext'
 import { getInitials } from '../../utils/helpers'
-import { NAVIGATION_WIDTH } from '../../utils/constants'
 
 const AppLayout: React.FC = () => {
   const [sidebarOpen, setSidebarOpen] = useState(true)
