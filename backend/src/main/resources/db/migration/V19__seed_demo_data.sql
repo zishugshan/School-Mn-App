@@ -1,6 +1,6 @@
 -- Seed comprehensive demo data for development and production testing
 -- Password for all imported users: SCHOOL@2024 (bcrypt hash)
--- Requires V16 (demo users) and V17 (test dates) to have run first
+-- Requires V16 (demo users), V17 (schema fixes), V18 (test dates) to have run first
 
 DO $$
 DECLARE
