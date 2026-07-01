@@ -1,1 +1,0 @@
-ALTER TABLE attendance ALTER COLUMN status TYPE VARCHAR(20);
