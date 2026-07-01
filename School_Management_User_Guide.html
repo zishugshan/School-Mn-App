@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>School Management System — User Guide</title>
+<style>
+  @page { margin: 20mm; size: A4; }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; color: #1a1a2e; line-height: 1.6; padding: 40px; max-width: 900px; margin: auto; }
+  h1 { font-size: 28px; border-bottom: 3px solid #4361ee; padding-bottom: 10px; margin-bottom: 30px; color: #1a1a2e; }
+  h2 { font-size: 22px; border-bottom: 2px solid #e0e0e0; padding-bottom: 6px; margin: 30px 0 15px; color: #4361ee; }
+  h3 { font-size: 18px; margin: 20px 0 10px; color: #2d3748; }
+  p, li { margin-bottom: 8px; }
+  ul, ol { padding-left: 24px; margin-bottom: 15px; }
+  table { width: 100%; border-collapse: collapse; margin: 15px 0 20px; font-size: 14px; }
+  th, td { border: 1px solid #ddd; padding: 8px 12px; text-align: left; }
+  th { background: #4361ee; color: white; font-weight: 600; }
+  tr:nth-child(even) { background: #f8f9fa; }
+  code { background: #edf2f7; padding: 2px 6px; border-radius: 3px; font-size: 13px; }
+  .toc { background: #f8f9fa; padding: 20px; border-radius: 8px; margin-bottom: 30px; }
+  .toc h2 { margin-top: 0; border: none; }
+  .toc ol { margin-bottom: 0; }
+  .toc a { color: #4361ee; text-decoration: none; }
+  .toc a:hover { text-decoration: underline; }
+  @media print { body { padding: 0; } .toc { break-after: page; } }
+</style>
+</head>
+<body>
+
+<h1>School Management System — User Guide</h1>
+
+<div class="toc">
+<h2>Table of Contents</h2>
+<ol>
+  <li><a href="#intro">Introduction</a></li>
+  <li><a href="#getting-started">Getting Started</a></li>
+  <li><a href="#dashboard">Dashboard Overview</a></li>
+  <li><a href="#students">Student Management</a></li>
+  <li><a href="#teachers">Teacher Management</a></li>
+  <li><a href="#classes">Class &amp; Subject Management</a></li>
+  <li><a href="#attendance">Attendance</a></li>
+  <li><a href="#homework">Homework</a></li>
+  <li><a href="#tests">Tests &amp; Marks</a></li>
+  <li><a href="#exams">Exams &amp; Timetable</a></li>
+  <li><a href="#library">Library</a></li>
+  <li><a href="#chat">Chat</a></li>
+  <li><a href="#reports">Reports &amp; Analytics</a></li>
+  <li><a href="#notifications">Notifications</a></li>
+  <li><a href="#import">Bulk Import</a></li>
+  <li><a href="#profile">Profile &amp; Settings</a></li>
+  <li><a href="#roles">Role-Based Access</a></li>
+  <li><a href="#faq">FAQ &amp; Troubleshooting</a></li>
+</ol>
+</div>
+
+<h2 id="intro">1. Introduction</h2>
+<p>The School Management System is a web-based platform designed to streamline school administration. It provides different views and capabilities based on user roles: <strong>Super Admin</strong>, <strong>School Admin</strong>, <strong>Teacher</strong>, <strong>Student</strong>, and <strong>Parent</strong>.</p>
+
+<h3>Key Features</h3>
+<ul>
+  <li>Student and teacher record management</li>
+  <li>Class and section organization</li>
+  <li>Attendance tracking</li>
+  <li>Homework assignment and submission</li>
+  <li>Test and examination management</li>
+  <li>Marks and grading</li>
+  <li>Timetable scheduling</li>
+  <li>Library management</li>
+  <li>Built-in chat</li>
+  <li>Reports and analytics</li>
+  <li>Bulk data import</li>
+</ul>
+
+<h2 id="getting-started">2. Getting Started</h2>
+<h3>Accessing the Application</h3>
+<p>Open your browser and navigate to the school's URL. You will see the login page.</p>
+
+<h3>Logging In</h3>
+<ol>
+  <li>Enter your <strong>email address</strong> (provided by the school).</li>
+  <li>Enter your <strong>password</strong>.</li>
+  <li>Click <strong>Login</strong>.</li>
+</ol>
+
+<table>
+  <tr><th>Role</th><th>Email</th><th>Password</th></tr>
+  <tr><td>Super Admin</td><td>superadmin@school.com</td><td>password123</td></tr>
+  <tr><td>Teacher</td><td>mohan@school.com</td><td>password123</td></tr>
+  <tr><td>Student</td><td>sana@school.com</td><td>password123</td></tr>
+  <tr><td>Parent</td><td>imtiyaz.parent@school.com</td><td>password123</td></tr>
+</table>
+<p>Demo student accounts: <code>student1@school.com</code> through <code>student72@school.com</code> with password <code>password123</code>.</p>
+
+<h3>Logging Out</h3>
+<p>Click your avatar (profile picture icon) in the top-right corner and select <strong>Logout</strong>.</p>
+
+<h2 id="dashboard">3. Dashboard Overview</h2>
+<p>The dashboard is your home screen after login. It displays:</p>
+<ul>
+  <li><strong>Quick Stats</strong> — Total students, teachers, attendance percentage, upcoming events.</li>
+  <li><strong>Upcoming Tests</strong> — Tests scheduled in the next few days.</li>
+  <li><strong>Recent Activity</strong> — Latest attendance records, homework submissions.</li>
+  <li><strong>Notifications</strong> — Unread alerts and reminders.</li>
+  <li><strong>Charts</strong> — Attendance trends, performance graphs (varies by role).</li>
+</ul>
+<p>Each role sees a customized dashboard. Admins and teachers see school-wide statistics. Students see personal attendance and homework. Parents see their child's performance.</p>
+
+<h2 id="students">4. Student Management</h2>
+<h3>Viewing Students</h3>
+<p>Navigate to <strong>Students</strong> in the sidebar. The table shows Name, Email, Class-Section, Roll Number, Gender, and Parent Name. Use the search bar to find a student.</p>
+
+<h3>Adding a Student</h3>
+<ol>
+  <li>Click <strong>Add Student</strong>.</li>
+  <li>Fill in: First Name, Last Name, Email, Date of Birth, Gender, Class, Section, Phone, Address.</li>
+  <li>Click <strong>Create</strong>.</li>
+</ol>
+<p>Default password: <code>password123</code>.</p>
+
+<h3>Editing a Student</h3>
+<p>Click on any student row to view details, then click <strong>Edit</strong> to modify.</p>
+
+<h2 id="teachers">5. Teacher Management</h2>
+<h3>Viewing Teachers</h3>
+<p>Navigate to <strong>Teachers</strong>. The table shows Name, Email, Employee Code, Qualification, Specialization, Phone, and Status.</p>
+
+<h3>Adding a Teacher</h3>
+<ol>
+  <li>Click <strong>Add Teacher</strong>.</li>
+  <li>Fill in: First Name, Last Name, Email, Qualification, Date of Birth, Gender, Phone, Address.</li>
+  <li>Click <strong>Create</strong>.</li>
+</ol>
+
+<h2 id="classes">6. Class &amp; Subject Management</h2>
+<p>Navigate to <strong>Classes</strong> to view all classes (1–12) with sections A, B, C. Navigate to <strong>Subjects</strong> to view subjects taught. Subject-to-class mappings determine availability per grade level.</p>
+
+<h2 id="attendance">7. Attendance</h2>
+<ol>
+  <li>Navigate to <strong>Attendance</strong>.</li>
+  <li>Select a Class and Section.</li>
+  <li>Select a Date.</li>
+  <li>Mark each student as: <strong>Present</strong> (green), <strong>Absent</strong> (red), <strong>Late</strong> (yellow), or <strong>Leave</strong> (blue).</li>
+  <li>Click <strong>Save</strong>.</li>
+</ol>
+<p>Students view their attendance in <strong>My Attendance</strong>. Teachers see class-wise summaries. Admins see school-wide analytics.</p>
+
+<h2 id="homework">8. Homework</h2>
+<h3>Creating Homework</h3>
+<ol>
+  <li>Navigate to <strong>Homework</strong> and click <strong>Add Homework</strong>.</li>
+  <li>Enter Title, Description, Subject, Target Class/Section, Due Date, and Max Score.</li>
+  <li>Click <strong>Create</strong>.</li>
+</ol>
+<h3>Student View</h3>
+<p>Students see pending assignments under <strong>My Homework</strong>.</p>
+<h3>Teacher Review</h3>
+<p>Teachers can view submissions and provide marks and feedback.</p>
+
+<h2 id="tests">9. Tests &amp; Marks</h2>
+<h3>Creating Tests</h3>
+<ol>
+  <li>Navigate to <strong>Tests</strong> and click <strong>Add Test</strong>.</li>
+  <li>Enter Title, Subject, Class, Section, Date, Maximum Marks, Passing Marks, and Exam Type.</li>
+  <li>Click <strong>Create</strong>.</li>
+</ol>
+<h3>Entering Marks</h3>
+<ol>
+  <li>Navigate to <strong>Marks</strong> and select a test.</li>
+  <li>Enter marks for each student and click <strong>Save</strong>.</li>
+</ol>
+<h3>Leaderboards</h3>
+<p>View top-performing students across classes and subjects under <strong>Leaderboards</strong>.</p>
+
+<h2 id="exams">10. Exams &amp; Timetable</h2>
+<h3>Exam Schedules</h3>
+<p>Navigate to <strong>Exams</strong> to view upcoming exams with title, subject, class, date, time, and room.</p>
+<h3>Timetable</h3>
+<p>Navigate to <strong>Timetable</strong> and select a Class/Section to view 6 periods per day, Monday–Friday, with subject, teacher, and room for each period.</p>
+
+<h2 id="library">11. Library</h2>
+<p>Navigate to <strong>Library</strong> to browse books and digital resources organized by category. Books show title, author, ISBN, publisher, and availability. Digital resources include PDF notes and online learning links.</p>
+<p>Books are automatically issued to students matching their grade level with issue date, due date, and status tracking.</p>
+
+<h2 id="chat">12. Chat</h2>
+<ol>
+  <li>Navigate to <strong>Chat</strong>.</li>
+  <li>Search for a user by name or email.</li>
+  <li>Click on a user to open a conversation.</li>
+  <li>Type your message and press <strong>Enter</strong> or click <strong>Send</strong>.</li>
+</ol>
+<p>Conversations auto-refresh every 5 seconds. Unread message count appears on the sidebar.</p>
+
+<h2 id="reports">13. Reports &amp; Analytics</h2>
+<p><strong>Reports</strong> — Generate student performance reports, attendance summaries, and class-wise analysis.</p>
+<p><strong>Analytics</strong> — Visual data insights including attendance trends, test score distributions, subject-wise comparisons, and demographic data.</p>
+
+<h2 id="notifications">14. Notifications</h2>
+<p>Click the <strong>bell icon</strong> in the top bar to view notifications about homework, tests, attendance updates, and announcements.</p>
+
+<h2 id="import">15. Bulk Import</h2>
+<p>Available to Super Admins. Navigate to <strong>Import</strong>.</p>
+
+<h3>Importing Students</h3>
+<p>Upload CSV/Excel with columns: First Name, Last Name, Email, Date of Birth, Gender, Class, Section (Address, City, State, Pin Code optional).</p>
+
+<h3>Importing Teachers</h3>
+<p>Upload CSV/Excel with columns: First Name, Last Name, Email, Date of Birth, Gender, Qualification, Address, Phone.</p>
+
+<p>Default password for imported users: <code>password123</code>.</p>
+
+<h2 id="profile">16. Profile &amp; Settings</h2>
+<p><strong>Profile</strong> — View and edit personal information, name, email, contact details, and class/section (for students).</p>
+<p><strong>Settings</strong> — Update notification preferences and change password.</p>
+
+<h2 id="roles">17. Role-Based Access</h2>
+<table>
+  <tr><th>Feature</th><th>Super Admin</th><th>School Admin</th><th>Teacher</th><th>Student</th><th>Parent</th></tr>
+  <tr><td>Dashboard</td><td>✓</td><td>✓</td><td>✓</td><td>✓</td><td>✓</td></tr>
+  <tr><td>Students</td><td>✓</td><td>✓</td><td>✓</td><td>—</td><td>—</td></tr>
+  <tr><td>Teachers</td><td>✓</td><td>✓</td><td>—</td><td>—</td><td>—</td></tr>
+  <tr><td>Parents</td><td>✓</td><td>✓</td><td>—</td><td>—</td><td>—</td></tr>
+  <tr><td>Classes</td><td>✓</td><td>✓</td><td>✓</td><td>—</td><td>—</td></tr>
+  <tr><td>Subjects</td><td>✓</td><td>✓</td><td>—</td><td>—</td><td>—</td></tr>
+  <tr><td>Attendance</td><td>✓</td><td>✓</td><td>✓</td><td>—</td><td>✓</td></tr>
+  <tr><td>My Attendance</td><td>—</td><td>—</td><td>—</td><td>✓</td><td>—</td></tr>
+  <tr><td>Homework</td><td>✓</td><td>✓</td><td>✓</td><td>—</td><td>✓</td></tr>
+  <tr><td>My Homework</td><td>—</td><td>—</td><td>—</td><td>✓</td><td>—</td></tr>
+  <tr><td>Tests</td><td>✓</td><td>✓</td><td>✓</td><td>✓</td><td>✓</td></tr>
+  <tr><td>Marks</td><td>✓</td><td>✓</td><td>✓</td><td>—</td><td>✓</td></tr>
+  <tr><td>My Marks</td><td>—</td><td>—</td><td>—</td><td>✓</td><td>—</td></tr>
+  <tr><td>Leaderboards</td><td>✓</td><td>✓</td><td>✓</td><td>✓</td><td>✓</td></tr>
+  <tr><td>Reports</td><td>✓</td><td>✓</td><td>✓</td><td>—</td><td>—</td></tr>
+  <tr><td>Analytics</td><td>✓</td><td>✓</td><td>—</td><td>—</td><td>—</td></tr>
+  <tr><td>Notifications</td><td>✓</td><td>✓</td><td>✓</td><td>✓</td><td>✓</td></tr>
+  <tr><td>Calendar</td><td>✓</td><td>✓</td><td>✓</td><td>✓</td><td>✓</td></tr>
+  <tr><td>Library</td><td>✓</td><td>✓</td><td>✓</td><td>✓</td><td>—</td></tr>
+  <tr><td>Chat</td><td>✓</td><td>✓</td><td>✓</td><td>✓</td><td>✓</td></tr>
+  <tr><td>Remarks</td><td>✓</td><td>✓</td><td>✓</td><td>—</td><td>✓</td></tr>
+  <tr><td>Goals</td><td>—</td><td>—</td><td>✓</td><td>✓</td><td>—</td></tr>
+  <tr><td>Timetable</td><td>✓</td><td>✓</td><td>✓</td><td>✓</td><td>✓</td></tr>
+  <tr><td>Exams</td><td>✓</td><td>✓</td><td>✓</td><td>✓</td><td>✓</td></tr>
+  <tr><td>Import</td><td>✓</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
+  <tr><td>Profile</td><td>✓</td><td>✓</td><td>✓</td><td>✓</td><td>✓</td></tr>
+</table>
+
+<h2 id="faq">18. FAQ &amp; Troubleshooting</h2>
+
+<h3>Q: I forgot my password. What do I do?</h3>
+<p>Contact your school administrator to reset your password.</p>
+
+<h3>Q: Why can't I see certain menu items?</h3>
+<p>Each role has specific permissions. Refer to the Role-Based Access table above.</p>
+
+<h3>Q: The student I added doesn't appear in the list?</h3>
+<p>The list shows up to 200 records sorted by newest first. Use the search bar to find specific students.</p>
+
+<h3>Q: How do I change my class or section?</h3>
+<p>Contact a School Admin or Super Admin to update your assignment.</p>
+
+<h3>Q: How often does the chat refresh?</h3>
+<p>The chat checks for new messages every 5 seconds automatically.</p>
+
+<h3>Q: What browsers are supported?</h3>
+<p>Chrome, Firefox, Safari, and Edge (latest versions).</p>
+
+<br>
+<hr>
+<p style="text-align:center;color:#666;font-size:13px"><em>Document Version 1.0 — July 2026</em></p>
+
+</body>
+</html>
