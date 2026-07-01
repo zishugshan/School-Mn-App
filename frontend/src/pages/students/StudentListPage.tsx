@@ -22,7 +22,7 @@ export default function StudentListPage() {
   const fetchStudents = useCallback(async (query?: string) => {
     setLoading(true)
     try {
-      const params: Record<string, string> = { size: '100' }
+      const params: Record<string, string> = { size: '200', sort: 'id,desc' }
       if (query) params.search = query
       const [res, parentRes] = await Promise.all([
         studentsApi.getAll(params),

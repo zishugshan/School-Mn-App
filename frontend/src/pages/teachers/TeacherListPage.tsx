@@ -21,7 +21,7 @@ export default function TeacherListPage() {
   const fetchTeachers = useCallback(async (query?: string) => {
     setLoading(true)
     try {
-      const params: Record<string, string> = {}
+      const params: Record<string, string> = { size: '200' }
       if (query) params.search = query
       const res = await teachersApi.getAll(params)
       const pageData = res.data?.data
