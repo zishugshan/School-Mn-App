@@ -22,6 +22,7 @@ DECLARE
     subj_id INT;
     subj_name VARCHAR;
     hw_id INT;
+    cur_test_id INT;
     hw_title VARCHAR;
     hw_desc VARCHAR;
     today DATE := CURRENT_DATE;
