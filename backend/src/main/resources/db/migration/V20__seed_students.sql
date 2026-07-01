@@ -10,7 +10,7 @@ BEGIN
     INSERT INTO users (email, password_hash, first_name, last_name, role, is_active)
     SELECT
         'student' || g || '@school.com',
-        '$2a$10$6Dc4D2HHB3c3b73wKTetgegc.Z0U8a67AOzPRWHXzxEml1E.Jsw5W',
+        '$2a$10$xqWeVbI6tYeW3wphUkZrOeHdnZIp4SqovGePgvP6YetQNoe0XCGqy',
         (ARRAY['Arun','Bhavna','Chirag','Deepa','Ekta','Faisal','Gauri','Hemant','Isha','Jatin','Kavita','Lokesh','Mamta','Naresh','Parul','Radhika','Sachin','Tanvi','Usha','Varun','Yash','Anjali','Brijesh','Chandan','Divya','Gaurav','Hina','Irfan','Jyoti','Karan','Lavanya','Manish','Neha','Pooja','Rahul','Shreya','Tushar','Amit','Babita','Dinesh','Lalit','Mohit','Nidhi','Priya','Rohan','Sneha','Vikas','Arpita','Bhavana','Chetan','Dhruv','Farhan','Girish','Harsh','Kabir','Kirti','Manoj','Nitin','Rekha','Sonal','Vinod','Aarav','Aryan','Dev','Ishita','Krishna','Mira','Ravi','Sana','Tara','Zara','Aisha','Kajal','Ritika','Suresh','Swati'])[g],
         (ARRAY['Sharma','Verma','Gupta','Kumar','Singh','Yadav','Joshi','Patel','Das','Mehra','Saxena','Malhotra','Chopra','Reddy','Naidu','Iyer','Menon','Pandey','Dwivedi','Chatterjee','Tiwari','Dubey','Mishra','Bhatt','Rao','Kapoor','Nair','Ahuja','Srinivasan','Deshmukh','Bajaj','Choudhury','Lal','Agarwal','Khanna','Mehta','Sethi','Bose','Sen','Ghosh'])[(g % 40) + 1],
         'STUDENT', true
