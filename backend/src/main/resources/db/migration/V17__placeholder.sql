@@ -1,0 +1,4 @@
+-- Placeholder migration — V17 was originally update_test_dates (now V18).
+-- This file exists to prevent Flyway from detecting a version gap.
+-- All schema fixes from legacy V3/V4/V6/V8/V9/V10/V12 are already applied.
+-- Demo data is seeded by V19.
