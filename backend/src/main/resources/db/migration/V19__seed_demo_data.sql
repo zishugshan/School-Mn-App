@@ -359,33 +359,36 @@ RAISE NOTICE '12. Issued books to students';
 -- 13. TIMETABLE (6 periods/day, Mon-Fri per section)
 -- ============================================================
 INSERT INTO timetable_entries (class_id, section_id, subject_id, teacher_id, day_of_week, start_time, end_time, room_number)
-SELECT
-    c.id,
-    sec.id,
-    s.id,
-    COALESCE((SELECT ts.teacher_id FROM teacher_subject ts WHERE ts.subject_id = s.id ORDER BY RANDOM() LIMIT 1), 1),
-    dow,
-    ('08:00'::TIME + (period * 50 || ' minutes')::INTERVAL)::TIME,
-    ('08:00'::TIME + ((period * 50 + 40) || ' minutes')::INTERVAL)::TIME,
-    'Room ' || (100 + (s.id * 7 + c.id * 3 + sec.id * 5 + dow) % 200)
-FROM classes c
-JOIN sections sec ON sec.class_id = c.id
-JOIN subjects s ON s.name = ANY(
-    CASE WHEN CAST(SUBSTRING(c.name FROM 7) AS INT) <= 5 THEN
-        ARRAY['Mathematics','English','Science','Hindi','Physical Education','General']
-    WHEN CAST(SUBSTRING(c.name FROM 7) AS INT) <= 10 THEN
-        ARRAY['Mathematics','English','Science','Social Studies','Hindi','Computer Science']
-    ELSE
-        ARRAY['Physics','Chemistry','Biology','Mathematics','English','Physical Education']
-    END
+WITH subjects_per_section AS (
+    SELECT c.id AS class_id, sec.id AS section_id, s.id AS subject_id,
+           ROW_NUMBER() OVER (PARTITION BY c.id, sec.id ORDER BY s.id) - 1 AS rn,
+           COUNT(*) OVER (PARTITION BY c.id, sec.id) AS cnt
+    FROM classes c
+    JOIN sections sec ON sec.class_id = c.id
+    JOIN subjects s ON s.name = ANY(
+        CASE WHEN CAST(SUBSTRING(c.name FROM 7) AS INT) <= 5 THEN
+            ARRAY['Mathematics','English','Science','Hindi','Physical Education','General']
+        WHEN CAST(SUBSTRING(c.name FROM 7) AS INT) <= 10 THEN
+            ARRAY['Mathematics','English','Science','Social Studies','Hindi','Computer Science']
+        ELSE
+            ARRAY['Physics','Chemistry','Biology','Mathematics','English','Physical Education']
+        END
+    )
 )
+SELECT
+    sps.class_id,
+    sps.section_id,
+    sps.subject_id,
+    COALESCE((SELECT ts.teacher_id FROM teacher_subject ts WHERE ts.subject_id = sps.subject_id ORDER BY RANDOM() LIMIT 1), 1),
+    d.dow,
+    ('08:00'::TIME + (p.period * 50 || ' minutes')::INTERVAL)::TIME,
+    ('08:00'::TIME + ((p.period * 50 + 40) || ' minutes')::INTERVAL)::TIME,
+    'Room ' || (100 + (sps.subject_id * 7 + sps.class_id * 3 + sps.section_id * 5 + d.dow) % 200)
+FROM subjects_per_section sps
 CROSS JOIN (SELECT generate_series(1,5) AS dow) d
 CROSS JOIN (SELECT generate_series(0,5) AS period) p
-WHERE NOT EXISTS (
-    SELECT 1 FROM timetable_entries t
-    WHERE t.class_id = c.id AND t.section_id = sec.id
-      AND t.day_of_week = dow AND t.start_time = ('08:00'::TIME + (period * 50 || ' minutes')::INTERVAL)::TIME
-);
+WHERE (p.period + d.dow) % sps.cnt = sps.rn
+ON CONFLICT DO NOTHING;
 RAISE NOTICE '13. Created timetables';
 
 RAISE NOTICE '=== Demo data seeding complete ===';
