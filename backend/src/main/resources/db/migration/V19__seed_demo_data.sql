@@ -192,12 +192,12 @@ RAISE NOTICE '6. Entered marks';
 -- 7. EXAM SCHEDULES
 -- ============================================================
 INSERT INTO exam_schedules (title, class_id, subject_id, exam_type, date, start_time, end_time, room_number)
-SELECT title, c.id, s.id, 'MIDTERM', CURRENT_DATE + INTERVAL '75 days', '09:00:00', '12:00:00', 'Room ' || (100 + (s.id * 7 + c.id * 3) % 200)
+SELECT 'Mid-Term - ' || s.name, c.id, s.id, 'MIDTERM', CURRENT_DATE + INTERVAL '75 days', '09:00:00', '12:00:00', 'Room ' || (100 + (s.id * 7 + c.id * 3) % 200)
 FROM classes c
 JOIN subjects s ON s.id IN (SELECT subject_id FROM class_subject WHERE class_id = c.id);
 
 INSERT INTO exam_schedules (title, class_id, subject_id, exam_type, date, start_time, end_time, room_number)
-SELECT title, c.id, s.id, 'FINAL', CURRENT_DATE + INTERVAL '160 days', '09:00:00', '12:00:00', 'Room ' || (150 + (s.id * 11 + c.id * 5) % 200)
+SELECT 'Final - ' || s.name, c.id, s.id, 'FINAL', CURRENT_DATE + INTERVAL '160 days', '09:00:00', '12:00:00', 'Room ' || (150 + (s.id * 11 + c.id * 5) % 200)
 FROM classes c
 JOIN subjects s ON s.id IN (SELECT subject_id FROM class_subject WHERE class_id = c.id);
 RAISE NOTICE '7. Created exam schedules';
