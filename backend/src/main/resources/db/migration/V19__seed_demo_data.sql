@@ -92,7 +92,7 @@ SELECT t.id, s.id
 FROM (SELECT id, ROW_NUMBER() OVER (ORDER BY id) rn FROM teachers) t
 CROSS JOIN LATERAL (
     SELECT id FROM subjects
-    WHERE name IN (
+    WHERE name = ANY(
         CASE WHEN t.rn = 1 THEN ARRAY['Mathematics','Science','Physics']
              WHEN t.rn = 2 THEN ARRAY['Mathematics']
              WHEN t.rn = 3 THEN ARRAY['Mathematics']
@@ -104,11 +104,16 @@ CROSS JOIN LATERAL (
              WHEN t.rn = 9 THEN ARRAY['Social Studies']
              WHEN t.rn = 10 THEN ARRAY['Hindi']
              WHEN t.rn = 11 THEN ARRAY['Hindi']
-             WHEN t.rn IN (12,13) THEN ARRAY['Science']
-             WHEN t.rn IN (14,15) THEN ARRAY['Physics','Computer Science']
-             WHEN t.rn IN (16,17) THEN ARRAY['Chemistry']
-             WHEN t.rn IN (18,19) THEN ARRAY['Biology']
-             WHEN t.rn IN (20,21) THEN ARRAY['Science']
+             WHEN t.rn = 12 THEN ARRAY['Science']
+             WHEN t.rn = 13 THEN ARRAY['Science']
+             WHEN t.rn = 14 THEN ARRAY['Physics','Computer Science']
+             WHEN t.rn = 15 THEN ARRAY['Physics','Computer Science']
+             WHEN t.rn = 16 THEN ARRAY['Chemistry']
+             WHEN t.rn = 17 THEN ARRAY['Chemistry']
+             WHEN t.rn = 18 THEN ARRAY['Biology']
+             WHEN t.rn = 19 THEN ARRAY['Biology']
+             WHEN t.rn = 20 THEN ARRAY['Science']
+             WHEN t.rn = 21 THEN ARRAY['Science']
         END
     )
 ) s
@@ -365,7 +370,7 @@ SELECT
     'Room ' || (100 + (s.id * 7 + c.id * 3 + sec.id * 5 + dow) % 200)
 FROM classes c
 JOIN sections sec ON sec.class_id = c.id
-JOIN subjects s ON s.name IN (
+JOIN subjects s ON s.name = ANY(
     CASE WHEN CAST(SUBSTRING(c.name FROM 7) AS INT) <= 5 THEN
         ARRAY['Mathematics','English','Science','Hindi','Physical Education','General']
     WHEN CAST(SUBSTRING(c.name FROM 7) AS INT) <= 10 THEN
